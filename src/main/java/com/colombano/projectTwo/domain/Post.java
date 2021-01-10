@@ -1,29 +1,35 @@
 package com.colombano.projectTwo.domain;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collection = "user") // collection is optional to name a document collection;
-public class User implements Serializable {
-	
+@Document(collection = "post")
+public class Post implements Serializable {
+
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	private String id;
-	private String name;
-	private String email;
 	
-	public User() {
+	private Date date;
+	private String title;
+	private String body;
+	
+	private User user;
+	
+	public Post() {
 		
 	}
 
-	public User(String id, String name, String email) {
-		super();
+	public Post(String id, Date date, String title, String body, User user) {
 		this.id = id;
-		this.name = name;
-		this.email = email;
+		this.date = date;
+		this.title = title;
+		this.body = body;
+		this.user = user;
 	}
 
 	public String getId() {
@@ -34,22 +40,38 @@ public class User implements Serializable {
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
+	public Date getDate() {
+		return date;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setDate(Date date) {
+		this.date = date;
 	}
 
-	public String getEmail() {
-		return email;
+	public String getTitle() {
+		return title;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
+	public String getBody() {
+		return body;
+	}
+
+	public void setBody(String body) {
+		this.body = body;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -66,7 +88,7 @@ public class User implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		User other = (User) obj;
+		Post other = (Post) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -74,5 +96,7 @@ public class User implements Serializable {
 			return false;
 		return true;
 	}
+	
+	
 	
 }
