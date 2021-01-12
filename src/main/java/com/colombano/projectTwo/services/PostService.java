@@ -1,5 +1,6 @@
 package com.colombano.projectTwo.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,11 +14,15 @@ import com.colombano.projectTwo.services.exception.ObjectNotFoundException;
 public class PostService {
 	
 	@Autowired
-	private PostRepository PostRepository;
+	private PostRepository postRepository;
 	
 	public Post findById(String id) {
-		Optional<Post> obj = PostRepository.findById(id);
+		Optional<Post> obj = postRepository.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException("Object not found"));
 	}
 		
+	public List<Post> findByTitle(String title) {
+		return postRepository.findByTitleContainingIgnoreCase(title);
+	}
+	
 }
